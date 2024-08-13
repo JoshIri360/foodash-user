@@ -114,5 +114,5 @@ Contributions are welcome! Please follow these guidelines to contribute:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Video Demo
+https://github.com/user-attachments/assets/bc33e5c6-5262-4655-8eaa-db9f5a39e961
 
-Uploading Screen Recording 2024-08-13 110403.mp4…
