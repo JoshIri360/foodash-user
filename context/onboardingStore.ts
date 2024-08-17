@@ -1,7 +1,6 @@
 import { create } from "zustand";
 
 interface OnboardingState {
-  step: number;
   name: string;
   email: string;
   password: string;
@@ -10,7 +9,6 @@ interface OnboardingState {
   address: string;
   phoneNumber: string;
 
-  setStep: (step: number) => void;
   setName: (name: string) => void;
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
@@ -22,7 +20,6 @@ interface OnboardingState {
 }
 
 export const useOnboardingStore = create<OnboardingState>((set) => ({
-  step: 1,
   name: "",
   email: "",
   password: "",
@@ -31,7 +28,6 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
   address: "",
   phoneNumber: "",
 
-  setStep: (step) => set({ step }),
   setName: (name) => set({ name }),
   setEmail: (email) => set({ email }),
   setPassword: (password) => set({ password }),
@@ -41,7 +37,6 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
   setPhoneNumber: (phoneNumber) => set({ phoneNumber }),
   resetOnboarding: () =>
     set({
-      step: 1,
       name: "",
       email: "",
       password: "",

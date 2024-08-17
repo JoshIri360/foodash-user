@@ -21,7 +21,9 @@ const useAuthStore = create((set, get) => ({
     try {
       set({ isLoading: true });
       const { user } = await signInWithEmailAndPassword(auth, email, password);
-      await registerForPushNotificationsAsync(user.uid);
+      const pushToken = await registerForPushNotificationsAsync(user.uid);
+      const userDocRef = doc(db, "users", user.uid);
+      await setDoc(userDocRef, { pushToken: pushToken || "" }, { merge: true });
       set({ user, isAuthenticated: true, isGuest: false, isLoading: false });
       await get().fetchUserData(user.uid);
       return { success: true, data: user };
@@ -57,12 +59,8 @@ const useAuthStore = create((set, get) => ({
 
       console.log("User UID:", user.uid);
 
-      // // 3. Get push token
-      // const pushTokenString = await registerForPushNotificationsAsync(user.uid);
+      const pushTokenString = await registerForPushNotificationsAsync(user.uid);
 
-      // console.log("Push token:", pushTokenString);
-
-      // 4. Set user document
       const userDocRef = doc(db, "users", user.uid);
       await setDoc(userDocRef, {
         username,
@@ -70,7 +68,7 @@ const useAuthStore = create((set, get) => ({
         email,
         selectedUniversity,
         balance: 0,
-        pushToken: "",
+        pushToken: pushTokenString || "",
       });
 
       console.log("User document created successfully");

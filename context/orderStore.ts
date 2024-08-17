@@ -73,7 +73,7 @@ const useOrderStore = create<OrderStore>((set) => {
           restaurantId,
           items: restaurantCartItems,
           location,
-          push_token: userDocData.push_token || null,
+          pushToken: userDocData.pushToken || null,
           createdAt: serverTimestamp(),
           status: "pending",
           totalAmount,
