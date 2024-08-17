@@ -92,7 +92,7 @@ export default function Home() {
         return;
       }
 
-      router.push<any>(`/(app)/${restaurant.id}`);
+      router.push<any>(`/(app)/restaurant/${restaurant.id}`);
     },
     [user, isGuest, router]
   );
