@@ -57,8 +57,6 @@ const useAuthStore = create((set, get) => ({
         throw new Error("User UID is undefined after creation");
       }
 
-      console.log("User UID:", user.uid);
-
       const pushTokenString = await registerForPushNotificationsAsync(user.uid);
 
       const userDocRef = doc(db, "users", user.uid);
@@ -70,8 +68,6 @@ const useAuthStore = create((set, get) => ({
         balance: 0,
         pushToken: pushTokenString || "",
       });
-
-      console.log("User document created successfully");
 
       const docSnap = await getDoc(userDocRef);
       if (!docSnap.exists()) {
