@@ -87,7 +87,7 @@ export default function Home() {
       if (!restaurant.open) {
         Alert.alert(
           "Restaurant Closed",
-          `${restaurant.name} is currently closed.`
+          `${restaurant.restaurantName} is currently closed.`
         );
         return;
       }

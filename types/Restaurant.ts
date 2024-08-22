@@ -10,8 +10,10 @@ export interface Restaurant {
   iconImage: string;
   mealCategories: string[];
   mealPreparationTime: MealPreparationTime;
-  name: string;
+  restaurantName: string;
   startTime: Date;
   uniId: string;
   open: boolean;
+  pushToken: string;
+  description: string;
 }
