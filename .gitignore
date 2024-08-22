@@ -44,5 +44,6 @@ expo-env.d.ts
 foodash-a6365-ff452045417f.json
 google-services.json
 GoogleService-Info.plist
+# app.json
 
 yarn.lock
