@@ -10,6 +10,7 @@ import { create } from "zustand";
 import { db } from "../firebaseConfig";
 import { useAuthStore } from "./authStore";
 import useCartStore from "./cartStore";
+import { sendPushNotification } from "@/components/notifications";
 
 interface CartItem {
   mealId: string;
@@ -24,15 +25,17 @@ interface OrderStore {
   createOrder: (
     location: string,
     restaurantId: string,
-    totalAmount: number
+    totalAmount: number,
+    pushToken: string
   ) => Promise<{ success: boolean; error?: any }>;
 }
+
 
 const useOrderStore = create<OrderStore>((set) => {
   let isCreatingOrder = false;
 
   return {
-    createOrder: async (location, restaurantId, totalAmount) => {
+    createOrder: async (location, restaurantId, totalAmount, pushToken) => {
       if (isCreatingOrder)
         return { success: false, error: "Order is already being processed" };
 
@@ -73,7 +76,7 @@ const useOrderStore = create<OrderStore>((set) => {
           restaurantId,
           items: restaurantCartItems,
           location,
-          push_token: userDocData.push_token || null,
+          pushToken: userDocData.pushToken || null,
           createdAt: serverTimestamp(),
           status: "pending",
           totalAmount,
@@ -86,6 +89,14 @@ const useOrderStore = create<OrderStore>((set) => {
           },
           { merge: true }
         );
+
+        if (pushToken) {
+          await sendPushNotification(
+            pushToken,
+            "New Order",
+            "You have a new order"
+          );
+        }
 
         clearCartForRestaurant(restaurantId);
 

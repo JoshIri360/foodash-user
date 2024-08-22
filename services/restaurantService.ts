@@ -11,7 +11,7 @@ import {
 
 const docToRestaurant = (doc: DocumentData): Restaurant => ({
   id: doc.id,
-  name: doc.data().restaurantName || "Unnamed Restaurant",
+  restaurantName: doc.data().restaurantName || "Unnamed Restaurant",
   coverImage: doc.data().coverImage || "",
   endTime: doc.data().endTime ? new Date(doc.data().endTime) : new Date(),
   iconImage: doc.data().iconImage || "",
@@ -20,6 +20,8 @@ const docToRestaurant = (doc: DocumentData): Restaurant => ({
   startTime: doc.data().startTime ? new Date(doc.data().startTime) : new Date(),
   uniId: doc.data().uniId || "",
   open: doc.data().open || false,
+  pushToken: doc.data().pushToken || "",
+  description: doc.data().description || "",
 });
 
 const getUserSelectedUniversity = async (userData: any, isGuest: boolean) => {

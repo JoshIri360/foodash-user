@@ -34,15 +34,18 @@ export default function PaystackCheckout() {
           phone={userData?.phoneNumber}
           channels={["card", "bank"]}
           onSuccess={() => {
-            createOrder(address, currentRestaurant?.id || "", intAmount).then(
-              (res) => {
-                if (res.success) {
-                  router.push("/success");
-                } else {
-                  router.push("/failed");
-                }
+            createOrder(
+              address,
+              currentRestaurant?.id || "",
+              intAmount,
+              currentRestaurant?.pushToken || ""
+            ).then((res) => {
+              if (res.success) {
+                router.push("/success");
+              } else {
+                router.push("/failed");
               }
-            );
+            });
           }}
           autoStart
         />

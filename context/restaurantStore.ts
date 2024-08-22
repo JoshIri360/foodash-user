@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
+import { Restaurant } from "@/types/Restaurant";
 
 interface MealPreparationTime {
   high: number;
@@ -14,20 +15,6 @@ interface Meal {
   name: string;
   price: number;
   available?: boolean;
-}
-
-interface Restaurant {
-  id: string;
-  coverImage: string;
-  endTime: Date;
-  iconImage: string;
-  mealCategories: string[];
-  mealPreparationTime: MealPreparationTime;
-  restaurantName: string;
-  startTime: Date;
-  uniId: string;
-  open: boolean;
-  description?: string;
 }
 
 interface RestaurantStore {

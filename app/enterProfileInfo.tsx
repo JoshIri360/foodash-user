@@ -56,7 +56,7 @@ const EnterProfileInfo = () => {
         AsyncStorage.setItem("lastOrderLocation", JSON.stringify(locations[0]));
       }
     });
-  }, [locations]);
+  }, []);
 
   useEffect(() => {
     if (university) {

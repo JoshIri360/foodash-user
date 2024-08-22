@@ -2,7 +2,7 @@ import { useAuthStore } from "@/context/authStore";
 import { useUniversityStore } from "@/context/universityStore";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { vs } from "react-native-size-matters";
@@ -55,7 +55,10 @@ const Header = () => {
         </View>
       </View>
       <Pressable
-        onPress={logout}
+        onPress={async () => {
+          await AsyncStorage.removeItem("lastOrderLocation");
+          await logout();
+        }}
         className="bg-[#1A2424] aspect-square rounded-full items-center justify-center"
         style={{ height: vs(30) }}
       >
