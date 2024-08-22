@@ -5,6 +5,7 @@ import useOrderStore from "@/context/orderStore";
 import { db } from "@/firebaseConfig";
 import { Entypo } from "@expo/vector-icons";
 import {
+  Href,
   Link,
   useLocalSearchParams,
   usePathname,
@@ -16,6 +17,7 @@ import { Pressable, Text, View } from "react-native";
 import { s, vs } from "react-native-size-matters";
 import RNPickerSelect from "react-native-picker-select";
 import { useUniversityStore } from "@/context/universityStore";
+import { useRestaurantStore } from "@/context/restaurantStore";
 
 export default function Location() {
   const { carts } = useCartStore();
@@ -34,6 +36,7 @@ export default function Location() {
   const [serviceCharge, setServiceCharge] = React.useState<number>(0);
   const [address, setAddress] = React.useState("");
   const [addressError, setAddressError] = React.useState(false);
+  const { currentRestaurant } = useRestaurantStore();
 
   const pathname = usePathname();
   const router = useRouter();
@@ -140,7 +143,8 @@ export default function Location() {
       const result = await createOrder(
         `${selectedLocation} - ${address}`,
         restaurantId,
-        totalAmount
+        totalAmount,
+        currentRestaurant?.pushToken || ""
       );
       if (result.success) {
         router.navigate("/success");
@@ -262,7 +266,9 @@ export default function Location() {
           </View>
           {totalAmount > balance && balance != undefined && (
             <Link
-              href={`/fundWallet?suggestedAmount=${totalAmount}&previousRoute=${pathname}`}
+              href={
+                `/fundWallet?suggestedAmount=${totalAmount}&previousRoute=${pathname}` as Href<"/fundWallet?suggestedAmount=${any}&previousRoute=${string}">
+              }
               asChild
             >
               <Pressable className="bg-black items-center justify-center self-end py-3 px-5 rounded-l-full">
