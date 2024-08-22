@@ -39,14 +39,14 @@ const RestuarantItem = ({
 
         <View className="flex-row items-center mt-1.5">
           <Text
-            className="text-black text-xl mt-2"
+            className="text-black text-xl"
             style={{
               fontFamily: "SenRegular",
               lineHeight: 20,
               includeFontPadding: false,
             }}
           >
-            {restaurant?.name}
+            {restaurant?.restaurantName}
           </Text>
           <View
             className="flex-row items-center justify-center border rounded-full px-2 py-0.5 ml-3"
